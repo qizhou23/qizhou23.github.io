@@ -233,6 +233,277 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="<https://qizhou23.github.io>/2019/07/02/关于flex布局的表格总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王启睿">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人生制造">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/02/关于flex布局的表格总结/" itemprop="url">关于flex布局的表格总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-02T23:58:18+08:00">
+                2019-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="【css】关于flex布局的表格总结"><a href="#【css】关于flex布局的表格总结" class="headerlink" title="【css】关于flex布局的表格总结"></a>【css】关于flex布局的表格总结</h1><ul>
+<li>主要参考资料：<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a>   flex布局教程-阮一峰</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>update：</li>
+</ul>
+<p>19.06.27 遇到了flutter的原生webview在oppo A37M上即使overflow:scroll,flex-shrink也默认不为0的情况，深感对flex的了解还很浅显，于是进行细节的学习。</p>
+<hr>
+<p><a name="ZSrpU"></a></p>
+<h4 id="主轴和交叉轴"><a href="#主轴和交叉轴" class="headerlink" title="主轴和交叉轴"></a>主轴和交叉轴</h4><p>首先一个贯穿全局的概念：主轴和交叉轴。</p>
+<p>主轴(main axis)默认为水平的，从容器左侧开始，到容器右侧结束，所以子元素的排列默认(flex-direction不进行特殊设置)为从左到右。</p>
+<p>交叉轴(cross axis)默认为垂直的，从容器上方开始，到容器底部结束，所以子元素的垂直方向(align-items不进行特殊设置)默认为从上到下。</p>
+<p>PS：如果容器的flex-direction设为colum，主轴的方向会转换为垂直方向的从上到下，这时交叉轴的方向会自动转换为从左到右(align-items:flex-start)。</p>
+<hr>
+<p><a href></a><br><a name="33b3fbbd"></a></p>
+<h4 id="作用于容器上的6个属性："><a href="#作用于容器上的6个属性：" class="headerlink" title="作用于容器上的6个属性："></a>作用于容器上的6个属性：</h4><table>
+<thead>
+<tr>
+<th>flex-direction</th>
+<th>flex-wrap</th>
+<th>flex-flow</th>
+<th>justify-content</th>
+<th>align-items</th>
+<th>align-content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主轴的方向</td>
+<td>如果一条轴线排不下，如何换行</td>
+<td>flex-direction和flex-wrap的合写</td>
+<td>项目在主轴上的对齐方法</td>
+<td>项目在交叉轴上的对齐方法</td>
+<td>定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</td>
+</tr>
+<tr>
+<td>row<br>(default)<br>左-&gt; 右</td>
+<td>nowrap<br>(default)<br>不换行</td>
+<td>row nowrap<br>(default)</td>
+<td>flex-start<br>(default)<br>主轴起点到终点</td>
+<td>flex-start<br>交叉轴起点到终点</td>
+<td></td>
+</tr>
+<tr>
+<td>row-reverse<br>右 -&gt; 左</td>
+<td>wrap<br>换行</td>
+<td></td>
+<td>flex-end<br>主轴终点到起点</td>
+<td>flex-end<br>交叉轴终点到起点</td>
+<td></td>
+</tr>
+<tr>
+<td>colum<br>上 -&gt; 下</td>
+<td>wrap-reverse<br>换行，第一行在最下</td>
+<td></td>
+<td>center<br>主轴上居中</td>
+<td>center<br>在交叉轴上居中</td>
+<td></td>
+</tr>
+<tr>
+<td>colum-reverse<br>下 -&gt; 上</td>
+<td></td>
+<td></td>
+<td>space-between<br>两端对齐，项目之间间隔相等</td>
+<td>baseline<br>会按照子项目第一行文字的基线对齐，如果不在一条水平线上，按照最靠下的一个</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>space-around<br>每个项目两侧间隔相等，所以项目之间为两个间隔</td>
+<td>stretch(default)<br>如果项目未设置高度或设为auto，将占满整个容器的高度。</td>
+</tr>
+</tbody>
+</table>
+<p><a name="M26cm"></a></p>
+<h4 id="作用于子项上的6个属性："><a href="#作用于子项上的6个属性：" class="headerlink" title="作用于子项上的6个属性："></a>作用于子项上的6个属性：</h4><table>
+<thead>
+<tr>
+<th>order</th>
+<th>flex-grow</th>
+<th>flex-shrink</th>
+<th>flex-basis</th>
+<th>flex</th>
+<th>align-self</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义项目的排列顺序。<br>数值越小，排列越靠前</td>
+<td>定义项目的放大<strong>比例</strong></td>
+<td>定义了项目的缩小<strong>比例</strong></td>
+<td>分配多余空间之前，项目占据的主轴空间</td>
+<td>flex-grow,flex-shrink,flex-basis的简写</td>
+<td>允许单个项目有与其他项目不一样的对齐方式,可覆盖align-items属性</td>
+</tr>
+<tr>
+<td><integer></integer></td>
+<td>0<br>(default)<br>存在剩余空间，也不放大</td>
+<td>1<br>(default)<br>如果空间不足，会把本项目缩小</td>
+<td>auto<br>(default)<br>项目的本来大小</td>
+<td>0 1 auto<br>(default)</td>
+<td>auto(default)<br>继承父类的align-items属性</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><length>固定的数值，则项目将占据固定空间</length></td>
+<td></td>
+<td>auto<br>(1 1 auto)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>none<br>(0 0 auto)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>flex-grow 是根据比例对<strong>剩余空间的分配</strong>进行的计算。</li>
+<li>flex-basis: auto;指的项目本来大小，是与flex-shrink互相作用的。而如果flex-basis的值为项目原本的宽度，那么flex-shrink属性会表现为不起作用。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="<https://qizhou23.github.io>/2019/06/29/2019-06-29-post/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -388,14 +659,32 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>
